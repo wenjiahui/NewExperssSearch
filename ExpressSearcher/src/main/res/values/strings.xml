@@ -3,6 +3,40 @@
 
     <string name="app_name">快递查询</string>
     <string name="action_settings">Settings</string>
+    <string name="email">邮件:</string>
+    <string name="email_address">"jiahuiwen622111@gmail.com"</string>
+    <string name="weibo">微博:</string>
+    <string name="weibo_name">"@Jiahui.wen"</string>
+    <string name="click_to_main">点击我</string>
+    <string name="phone_tip">联系电话：</string>
+    <string name="order_msg">订单详情：</string>
+    <string name="connection_error_msg">当前网络不可用，请稍后再试</string>
+    <string name="order_error_msg">快递公司参数异常：单号不存在或者已经过期</string>
+    <string name="order_unknown">很抱歉，您的快递单号暂时没有查询结果！</string>
+    <string name="order_ok">查询成功</string>
+    <string name="record_tips">查询记录：</string>
+    <string name="often_used">常用：</string>
+    <string name="company_shentong">申通</string>
+    <string name="company_ems">EMS</string>
+    <string name="company_shunfeng">顺丰</string>
+    <string name="company_yuantong">圆通</string>
+    <string name="company_zhongtong">中通</string>
+    <string name="company_rufengda">如风达</string>
+    <string name="company_yunda">韵达</string>
+    <string name="company_tiantian">天天</string>
+    <string name="company_huitong">汇通</string>
+    <string name="company_quanfeng">全峰</string>
+    <string name="company_debang">德邦</string>
+    <string name="company_more">更多...</string>
+    <string name="company">查询公司: </string>
+    <string name="order_number">订单号: </string>
+    <string name="tips_for_input_order_number">请输入订单号</string>
+    <string name="company_empty">请先选择快递公司</string>
+    <string name="really_exist">确定要退出吗？</string>
+    <string name="exist_title">提示</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="title_activity_more">more</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

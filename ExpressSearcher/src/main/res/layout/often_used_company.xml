@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bnt_shentong"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_shentong" />
+
+        <Button
+            android:id="@+id/bnt_ems"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_ems" />
+
+        <Button
+            android:id="@+id/bnt_shunfeng"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_shunfeng" />
+
+        <Button
+            android:id="@+id/bnt_yuantong"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_yuantong" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bnt_zhongtong"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_zhongtong" />
+
+        <Button
+            android:id="@+id/bnt_rufengda"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_rufengda" />
+
+        <Button
+            android:id="@+id/bnt_yunda"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_yunda" />
+
+        <Button
+            android:id="@+id/bnt_tiantian"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_tiantian" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bnt_huitong"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_huitong" />
+
+        <Button
+            android:id="@+id/bnt_quanfeng"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_quanfeng" />
+
+        <Button
+            android:id="@+id/bnt_debang"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_debang" />
+
+        <Button
+            android:id="@+id/bnt_more"
+            style="@style/button_often_used_companys"
+            android:onClick="oftenUsed"
+            android:text="@string/company_more" />
+    </TableRow>
+
+</TableLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/often_used_company_group"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/order_container"
+        layout="@layout/often_used_company" />
+
+
+    <TextView
+        android:id="@+id/selected_company"
+        android:layout_above="@+id/order_container"
+        android:layout_marginLeft="6dp"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/order_container"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal"
+        android:gravity="center|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/ex_order_number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/tips_for_input_order_number" />
+
+        <Button
+            android:id="@+id/scanner"
+            android:onClick="scanQrCode"
+            android:background="@drawable/btn_scanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+
+    <Button
+        style="@style/button_often_used_companys"
+        android:text="@string/confirm"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
