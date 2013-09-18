@@ -89,7 +89,7 @@
         <Button
             android:id="@+id/bnt_more"
             style="@style/button_often_used_companys"
-            android:onClick="oftenUsed"
+            android:onClick="moreCompany"
             android:text="@string/company_more" />
     </TableRow>
 

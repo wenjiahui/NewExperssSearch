@@ -4,7 +4,7 @@
     <string name="app_name">快递查询</string>
     <string name="action_settings">Settings</string>
     <string name="email">邮件:</string>
-    <string name="email_address">"jiahuiwen622111@gmail.com"</string>
+    <string name="email_address">"491705995@qq.com"</string>
     <string name="weibo">微博:</string>
     <string name="weibo_name">"@Jiahui.wen"</string>
     <string name="click_to_main">点击我</string>
@@ -38,5 +38,6 @@
     <string name="cancel">取消</string>
     <string name="title_activity_more">more</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="search">马上查询</string>
+    <string name="history">历史记录</string>
 </resources>

@@ -1077,6 +1077,11 @@ public abstract class MenuDrawer extends ViewGroup {
         mOnInterceptMoveEventListener = listener;
     }
 
+    @Override
+    protected int[] onCreateDrawableState(int extraSpace) {
+        return super.onCreateDrawableState(extraSpace);
+    }
+
     /**
      * Defines whether the drop shadow is enabled.
      *

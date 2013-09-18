@@ -2,10 +2,10 @@ package org.wen.express.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -15,7 +15,11 @@ import net.simonvt.menudrawer.MenuDrawer;
 import org.wen.express.AppContext;
 import org.wen.express.R;
 import org.wen.express.common.AppLogger;
-import org.wen.express.common.IntentUtil;
+import org.wen.express.type.AppConstant;
+import org.wen.express.type.Category;
+import org.wen.express.ui.fragment.DrawerFragment;
+import org.wen.express.ui.fragment.HistoryFragment;
+import org.wen.express.ui.fragment.ListCompanyFragment;
 import org.wen.express.ui.fragment.SimpleCompanyFragment;
 
 public class MainActivity extends SherlockFragmentActivity {
@@ -25,6 +29,9 @@ public class MainActivity extends SherlockFragmentActivity {
     private MenuDrawer mDrawer;
 
     protected SimpleCompanyFragment mSimpleCompanyFragment;
+    protected DrawerFragment mDrawerFramgment;
+
+    protected Category mCategory = Category.SEARCH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +50,15 @@ public class MainActivity extends SherlockFragmentActivity {
             mDrawer.setSlideDrawable(R.drawable.ic_drawer);
             // Whether the previous drawable should be shown
             mDrawer.setDrawerIndicatorEnabled(true);
-            setMenuDrawerListener(mDrawer.getMenuView());
         }
 
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         mSimpleCompanyFragment = SimpleCompanyFragment.getInstance();
-        getSupportFragmentManager().beginTransaction().add(R.id.container, mSimpleCompanyFragment).commit();
-    }
-
-    /**
-     * 对mDrawer设置点击事情
-     * @param menuView
-     */
-    private void setMenuDrawerListener(View menuView) {
-
+        ft.add(R.id.container, mSimpleCompanyFragment);
+        mDrawerFramgment = DrawerFragment.getInstance();
+        ft.add(R.id.drawer_container, mDrawerFramgment);
+        ft.commit();
     }
 
 
@@ -68,6 +71,15 @@ public class MainActivity extends SherlockFragmentActivity {
         if (!TextUtils.isEmpty(companyName) && mSimpleCompanyFragment != null) {
             mSimpleCompanyFragment.selectCompany(companyName);
         }
+    }
+
+    /**
+     * 查看更多的快递公司
+     * @param view 点击事件源
+     */
+    public void moreCompany(View view) {
+        Intent intent = new Intent(MainActivity.this, MoreActivity.class);
+        startActivityForResult(intent, AppConstant.LOAD_MORE_COMPANIES);
     }
 
     /**
@@ -86,6 +98,24 @@ public class MainActivity extends SherlockFragmentActivity {
 
     }
 
+
+    public void onDrawerItemSelected(Category category) {
+        mDrawer.closeMenu();
+        if (mCategory == category) {
+            return;
+        }
+        mCategory = category;
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (category == Category.SEARCH) {
+            mSimpleCompanyFragment = SimpleCompanyFragment.getInstance();
+            ft.replace(R.id.container, mSimpleCompanyFragment);
+        } else if (category == Category.HISTORY) {
+            ft.replace(R.id.container, HistoryFragment.getInstance());
+        }
+        ft.commit();
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -100,6 +130,11 @@ public class MainActivity extends SherlockFragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        if (requestCode == AppConstant.LOAD_MORE_COMPANIES && resultCode == RESULT_OK) {
+            String company = data.getStringExtra(AppConstant.SELECTED_COMPANY);
+            if (!TextUtils.isEmpty(company) && mSimpleCompanyFragment != null) {
+                mSimpleCompanyFragment.selectCompany(company);
+            }
+        }
     }
 }
