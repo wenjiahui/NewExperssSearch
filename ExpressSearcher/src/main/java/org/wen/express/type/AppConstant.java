@@ -11,4 +11,6 @@ public class AppConstant {
     public static final int CAPTURE_REQUEST_CODE = 0X112;
 
     public static final String CAPTURE_CODE = "CAPTURE_CODE";
+
+    public static final String APP_VERSION = "APP_VERSION";
 }

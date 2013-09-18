@@ -40,4 +40,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="search">马上查询</string>
     <string name="history">历史记录</string>
+    <string name="copy_db_error">复制数据库错误，请重启程序</string>
 </resources>
