@@ -42,4 +42,9 @@ public class SimpleCompanyFragment extends Fragment{
         TextView tv_company = (TextView) mViewContainer.findViewById(R.id.selected_company);
         tv_company.setText(company);
     }
+
+    public void setExpressCode(String code) {
+        TextView tv_expressCode = (TextView) mViewContainer.findViewById(R.id.ex_order_number);
+        tv_expressCode.setText(code);
+    }
 }

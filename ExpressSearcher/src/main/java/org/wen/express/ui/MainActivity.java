@@ -19,7 +19,6 @@ import org.wen.express.type.AppConstant;
 import org.wen.express.type.Category;
 import org.wen.express.ui.fragment.DrawerFragment;
 import org.wen.express.ui.fragment.HistoryFragment;
-import org.wen.express.ui.fragment.ListCompanyFragment;
 import org.wen.express.ui.fragment.SimpleCompanyFragment;
 
 public class MainActivity extends SherlockFragmentActivity {
@@ -79,7 +78,7 @@ public class MainActivity extends SherlockFragmentActivity {
      */
     public void moreCompany(View view) {
         Intent intent = new Intent(MainActivity.this, MoreActivity.class);
-        startActivityForResult(intent, AppConstant.LOAD_MORE_COMPANIES);
+        startActivityForResult(intent, AppConstant.LOAD_MORE_COMPANIES_REQUEST_CODE);
     }
 
     /**
@@ -87,7 +86,8 @@ public class MainActivity extends SherlockFragmentActivity {
      * @param view 点击事件源
      */
     public void scanQrCode(View view) {
-
+        Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+        startActivityForResult(intent, AppConstant.CAPTURE_REQUEST_CODE);
     }
 
     /**
@@ -130,10 +130,15 @@ public class MainActivity extends SherlockFragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == AppConstant.LOAD_MORE_COMPANIES && resultCode == RESULT_OK) {
+        if (requestCode == AppConstant.LOAD_MORE_COMPANIES_REQUEST_CODE && resultCode == RESULT_OK) {
             String company = data.getStringExtra(AppConstant.SELECTED_COMPANY);
             if (!TextUtils.isEmpty(company) && mSimpleCompanyFragment != null) {
                 mSimpleCompanyFragment.selectCompany(company);
+            }
+        } else if (requestCode == AppConstant.CAPTURE_REQUEST_CODE && resultCode == RESULT_OK) {
+            String code = data.getStringExtra(AppConstant.CAPTURE_CODE);
+            if (!TextUtils.isEmpty(code) && mSimpleCompanyFragment != null) {
+                mSimpleCompanyFragment.setExpressCode(code);
             }
         }
     }

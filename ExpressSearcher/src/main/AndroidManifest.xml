@@ -8,6 +8,10 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
     <application
         android:name="org.wen.express.AppContext"
         android:allowBackup="true"
@@ -25,9 +29,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.wen.express.MoreActivity"
+            android:name="org.wen.express.ui.MoreActivity"
             android:label="@string/title_activity_more" >
         </activity>
+        <activity android:name=".ui.CaptureActivity" />
     </application>
 
 </manifest>
