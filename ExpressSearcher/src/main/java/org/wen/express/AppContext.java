@@ -48,6 +48,7 @@ public class AppContext extends Application{
         if (!checkDBExist()) {
             copyDB();
         } else if (upgradeApp()) {
+            deletePreDatabase();
             copyDB();
             SharedPreferences.Editor editor = getSharedPreferences(this.getPackageName(), MODE_PRIVATE).edit();
             int version = getCurrentVersion();
@@ -55,7 +56,6 @@ public class AppContext extends Application{
             editor.commit();
         }
     }
-
 
     /**
      * 程序首次启动会从raw文件夹中负责数据库到指定目录，这里判断数据库是否存在
@@ -77,6 +77,17 @@ public class AppContext extends Application{
         AppLogger.d("database already exist");
         return true;
     }
+
+    private void deletePreDatabase() {
+        String target = "data/data/" + this.getPackageName() + "/databases/company.db";
+        File targetFile = new File(target);
+        try {
+            targetFile.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * 检查应用版本号是否升级
