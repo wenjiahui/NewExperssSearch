@@ -8,4 +8,5 @@
     <color name="possible_result_points">#c0ffff00</color>
     <color name="latest_express_details">#cd3700</color>
     <color name="company_can_called">#104e8b</color>
+    <color name="drawer_text_selector">#3d3d3d</color>
 </resources>

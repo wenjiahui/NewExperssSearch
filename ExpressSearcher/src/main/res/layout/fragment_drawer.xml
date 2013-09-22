@@ -3,11 +3,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:paddingLeft="5dp"
     android:layout_height="match_parent">
 
     <TableLayout
+        android:background="@drawable/drawer_about_me_bg"
         android:layout_width="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingBottom="7dp"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -72,8 +74,11 @@
     </TableLayout>
 
     <ListView
+        android:choiceMode="singleChoice"
+        android:paddingTop="20dip"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
         android:id="@+id/drawer_items"
-        android:layout_marginTop="15dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 

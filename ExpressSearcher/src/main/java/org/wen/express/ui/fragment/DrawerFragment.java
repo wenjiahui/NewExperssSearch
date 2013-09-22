@@ -56,13 +56,15 @@ public class DrawerFragment extends Fragment{
 
     //初始化界面，绑定监听器
     private void initlize() {
-        ListView listView = (ListView) drawerMenu.findViewById(R.id.drawer_items);
+        final ListView listView = (ListView) drawerMenu.findViewById(R.id.drawer_items);
+        listView.setItemChecked(0, true);
         listView.setAdapter(new DrawerAdapter(getActivity()));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (mainActivity != null) {
-                    mainActivity.onDrawerItemSelected((Category)view.getTag());
+                    listView.setItemChecked(i, true);
+                    mainActivity.onDrawerItemSelected((Category)view.getTag(), view, i);
                 }
             }
         });

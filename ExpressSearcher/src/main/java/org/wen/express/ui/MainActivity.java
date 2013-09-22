@@ -102,11 +102,12 @@ public class MainActivity extends SherlockFragmentActivity {
     }
 
 
-    public void onDrawerItemSelected(Category category) {
+    public void onDrawerItemSelected(Category category, View view, int i) {
         mDrawer.closeMenu();
         if (mCategory == category) {
             return;
         }
+        mDrawer.setActiveView(view, i);
         mCategory = category;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (category == Category.SEARCH) {
