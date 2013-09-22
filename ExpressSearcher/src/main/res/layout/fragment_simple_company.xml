@@ -45,6 +45,9 @@
 
 
     <Button
+        android:enabled="false"
+        android:id="@+id/search"
+        android:onClick="search"
         style="@style/button_often_used_companys"
         android:text="@string/confirm"
         android:layout_alignParentBottom="true"

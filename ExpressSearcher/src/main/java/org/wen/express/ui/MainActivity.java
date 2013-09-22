@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -95,7 +96,9 @@ public class MainActivity extends SherlockFragmentActivity {
      * @param view 点击事件源
      */
     public void search(View view) {
-
+        if (mSimpleCompanyFragment != null) {
+            mSimpleCompanyFragment.search();
+        }
     }
 
 
@@ -108,9 +111,9 @@ public class MainActivity extends SherlockFragmentActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (category == Category.SEARCH) {
             mSimpleCompanyFragment = SimpleCompanyFragment.getInstance();
-            ft.replace(R.id.container, mSimpleCompanyFragment);
+            ft.replace(R.id.container, mSimpleCompanyFragment, SimpleCompanyFragment.class.getSimpleName());
         } else if (category == Category.HISTORY) {
-            ft.replace(R.id.container, HistoryFragment.getInstance());
+            ft.replace(R.id.container, HistoryFragment.getInstance(), HistoryFragment.class.getSimpleName());
         }
         ft.commit();
 

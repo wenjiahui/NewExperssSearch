@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".ResultActivity">
+
+    <TableLayout
+        android:id="@+id/base_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="right"
+                android:text="@string/company"
+                style="@style/text_result" />
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:id="@+id/company"
+                android:textColor="#000000"
+                style="@style/text_result" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="right"
+                android:text="@string/order_number"
+                style="@style/text_result" />
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:id="@+id/express_code"
+                style="@style/text_result" />
+        </TableRow>
+
+    </TableLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <com.fima.cardsui.views.QuickReturnListView
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/base_information"
+        android:id="@+id/lv_result"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="6dp"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="ifContentScrolls"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

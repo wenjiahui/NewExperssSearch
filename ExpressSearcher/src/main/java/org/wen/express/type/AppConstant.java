@@ -13,4 +13,9 @@ public class AppConstant {
     public static final String CAPTURE_CODE = "CAPTURE_CODE";
 
     public static final String APP_VERSION = "APP_VERSION";
+
+    public static final String COMPANY = "COMPANY";
+
+    public static final String EXPRESS_CODE = "EXPRESS_CODE";
+
 }

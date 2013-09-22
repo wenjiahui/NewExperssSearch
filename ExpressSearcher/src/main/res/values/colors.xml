@@ -6,4 +6,6 @@
     <color name="viewfinder_mask">#60000000</color>
     <color name="result_view">#30000000</color>
     <color name="possible_result_points">#c0ffff00</color>
+    <color name="latest_express_details">#cd3700</color>
+    <color name="company_can_called">#104e8b</color>
 </resources>
