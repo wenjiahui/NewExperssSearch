@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,7 +32,9 @@ import org.wen.express.module.Result;
 import org.wen.express.type.AppConstant;
 import org.wen.express.ui.adapter.ResultAdapter;
 
-public class ResultActivity extends SherlockActivity {
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
+
+public class ResultActivity extends SherlockActivity implements PullToRefreshAttacher.OnRefreshListener {
 
     private TextView tv_company;
     private TextView tv_expressCode;
@@ -42,6 +45,8 @@ public class ResultActivity extends SherlockActivity {
     private String realCompany, realExpressCode;
 
     private Company company;
+
+    private PullToRefreshAttacher mPullToRefreshAttacher;
 
     private String[] projection = {
         Company.Params.COLUMN_ID,
@@ -54,6 +59,7 @@ public class ResultActivity extends SherlockActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_result);
 
         initlize();
@@ -63,7 +69,7 @@ public class ResultActivity extends SherlockActivity {
             search(company, originExpressCode);
         }
 
-      searchTest(null, null);
+//        searchTest(null, null);
     }
 
     private void updateUI(final Company company) {
@@ -97,6 +103,9 @@ public class ResultActivity extends SherlockActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.progress);
         listView = (ListView) findViewById(R.id.lv_result);
+
+        mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
+        mPullToRefreshAttacher.addRefreshableView(listView, this);
     }
 
     private Company getRealSearchValue() {
@@ -114,7 +123,7 @@ public class ResultActivity extends SherlockActivity {
         return _company;
     }
 
-    private void search(Company company, String originExpressCode) {
+    private void search(Company company, String realExpressCode) {
 
         if (company == null || TextUtils.isEmpty(company.company_en)) {
             return;
@@ -144,6 +153,9 @@ public class ResultActivity extends SherlockActivity {
         return new Response.Listener<Result>() {
             @Override
             public void onResponse(Result response) {
+                if (mPullToRefreshAttacher.isRefreshing()) {
+                    mPullToRefreshAttacher.setRefreshComplete();
+                }
                 AppLogger.d(response.toString());
                 progressBar.setVisibility(View.GONE);
                 if (response.data == null || response.data.size() == 0) {
@@ -153,6 +165,7 @@ public class ResultActivity extends SherlockActivity {
                 listView.setVisibility(View.VISIBLE);
                 ResultAdapter adapter = new ResultAdapter(response);
                 listView.setAdapter(adapter);
+                Toast.makeText(ResultActivity.this, R.string.load_data_successfully, Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -165,9 +178,27 @@ public class ResultActivity extends SherlockActivity {
                 AppLogger.d(error.toString());
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(ResultActivity.this, R.string.network_error, Toast.LENGTH_SHORT).show();
+                if (mPullToRefreshAttacher.isRefreshing()) {
+                    mPullToRefreshAttacher.setRefreshComplete();
+                }
             }
         };
     }
 
 
+    @Override
+    public void onRefreshStarted(View view) {
+        search(company, realExpressCode);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                ResultActivity.this.finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

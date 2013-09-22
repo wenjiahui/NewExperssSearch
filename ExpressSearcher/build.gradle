@@ -28,5 +28,6 @@ dependencies {
     compile project(':libraries:actionbarsherlock')
     compile project(':libraries:CardsUILib')
     compile project(':libraries:menudrawer')
+    compile project(':libraries:ActionBar-PullToRefresh')
     compile fileTree(dir: 'libs', include: '*.jar')
 }
