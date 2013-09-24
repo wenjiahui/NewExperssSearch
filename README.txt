@@ -1,7 +1,7 @@
 requestFormat:
+    URL: http://www.kuaidi100.com/query?type=shentong&postid=668535524584
 
 successlly request result:
-
 {
 
     "nu":"668535524584",

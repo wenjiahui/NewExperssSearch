@@ -20,17 +20,25 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.wen.express.AppContext;
 import org.wen.express.R;
 import org.wen.express.common.AppLogger;
 import org.wen.express.common.GsonRequest;
+import org.wen.express.common.GsonUtility;
 import org.wen.express.common.MyVolley;
 import org.wen.express.common.URLUtility;
 import org.wen.express.module.Company;
+import org.wen.express.module.Details;
+import org.wen.express.module.History;
 import org.wen.express.module.Result;
 import org.wen.express.type.AppConstant;
 import org.wen.express.ui.adapter.ResultAdapter;
+
+import java.util.Date;
+import java.util.List;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
@@ -45,6 +53,8 @@ public class ResultActivity extends SherlockActivity implements PullToRefreshAtt
     private String realCompany, realExpressCode;
 
     private Company company;
+
+    private ResultAdapter adapter;
 
     private PullToRefreshAttacher mPullToRefreshAttacher;
 
@@ -72,20 +82,6 @@ public class ResultActivity extends SherlockActivity implements PullToRefreshAtt
 //        searchTest(null, null);
     }
 
-    private void updateUI(final Company company) {
-        tv_company.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-        tv_company.getPaint().setFakeBoldText(true);
-        tv_company.setTextColor(AppContext.getInstance().getResources().getColor(R.color.company_can_called));
-        tv_company.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String number = "tel:" + company.phone;
-                Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse(number));
-                startActivity(callIntent);
-            }
-        });
-    }
-
     private void initlize() {
         Bundle data = getIntent().getExtras() == null ? new Bundle() : getIntent().getExtras();
         originCompany = data.getString(AppConstant.COMPANY, "");
@@ -102,10 +98,43 @@ public class ResultActivity extends SherlockActivity implements PullToRefreshAtt
         tv_expressCode.setText(originExpressCode);
 
         progressBar = (ProgressBar) findViewById(R.id.progress);
+
+        Result result = null;
         listView = (ListView) findViewById(R.id.lv_result);
+        adapter = new ResultAdapter(result);
+        listView.setAdapter(adapter);
+
+        String cache = ((AppContext)AppContext.getInstance()).getCache(realExpressCode);
+        AppLogger.d("cache " + realExpressCode + " is: " + cache);
+        if (!TextUtils.isEmpty(cache)) {
+            List<Details> cacheResult = GsonUtility.getGson().fromJson(cache, new TypeToken<List<Details>>() {}.getType());
+            result = new Result();
+            result.data = cacheResult;
+            if (cacheResult == null) {
+                AppLogger.d("make List from cache is null");
+            } else {
+                AppLogger.d("make List from cache' size: " + cacheResult.size());
+            }
+        }
+        adapter.updateResult(result);
+        adapter.notifyDataSetChanged();
 
         mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
         mPullToRefreshAttacher.addRefreshableView(listView, this);
+    }
+
+    private void updateUI(final Company company) {
+        tv_company.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        tv_company.getPaint().setFakeBoldText(true);
+        tv_company.setTextColor(AppContext.getInstance().getResources().getColor(R.color.company_can_called));
+        tv_company.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String number = "tel:" + company.phone;
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse(number));
+                startActivity(callIntent);
+            }
+        });
     }
 
     private Company getRealSearchValue() {
@@ -129,6 +158,7 @@ public class ResultActivity extends SherlockActivity implements PullToRefreshAtt
             return;
         }
 
+        mPullToRefreshAttacher.setRefreshing(true);
         RequestQueue requestQueue = MyVolley.getRequestQueue();
         GsonRequest request = new GsonRequest(Request.Method.GET,
                 URLUtility.getURL(company.company_en, realExpressCode),
@@ -163,9 +193,16 @@ public class ResultActivity extends SherlockActivity implements PullToRefreshAtt
                     return;
                 }
                 listView.setVisibility(View.VISIBLE);
-                ResultAdapter adapter = new ResultAdapter(response);
-                listView.setAdapter(adapter);
+                adapter.updateResult(response);
+                adapter.notifyDataSetChanged();
+
                 Toast.makeText(ResultActivity.this, R.string.load_data_successfully, Toast.LENGTH_SHORT).show();
+
+                History history = new History(response);
+                history.company_cn = originCompany;
+                History.saveOrUpdate(history);
+                ((AppContext)AppContext.getInstance()).saveCache(history.code,
+                        GsonUtility.getGson().toJson(response.getData(), new TypeToken<List<Details>>(){}.getType()));
             }
         };
     }

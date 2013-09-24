@@ -39,6 +39,11 @@
             android:name="org.wen.express.provider.CompanyProvider"
             android:authorities="org.wen.express.provider.express.companys" />
 
+        <provider
+            android:name="org.wen.express.provider.DataProvider"
+            android:authorities="org.wen.express.provider.express.data"/>
+
+
         <activity
             android:name="org.wen.express.ui.ResultActivity"
             android:label="@string/title_activity_result" >

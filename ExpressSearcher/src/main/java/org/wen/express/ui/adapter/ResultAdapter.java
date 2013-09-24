@@ -12,6 +12,7 @@ import org.wen.express.R;
 import org.wen.express.module.Details;
 import org.wen.express.module.Result;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +25,19 @@ public class ResultAdapter extends BaseAdapter {
 
     public ResultAdapter(Result result) {
         this.result = result;
-        datas = result.data;
+        if (result == null) {
+            datas = new ArrayList<Details>();
+        } else {
+            datas = result.data;
+        }
+
+    }
+
+    public void updateResult(Result result) {
+        this.result = result;
+        if (result != null) {
+            datas = result.getData();
+        }
     }
 
     @Override

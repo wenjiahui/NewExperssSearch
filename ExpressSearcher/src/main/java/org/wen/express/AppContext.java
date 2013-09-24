@@ -10,7 +10,10 @@ import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
+import com.actionbarsherlock.internal.nineoldandroids.animation.ObjectAnimator;
+
 import org.wen.express.common.AppLogger;
+import org.wen.express.common.Cache;
 import org.wen.express.common.HardwareUtility;
 import org.wen.express.type.AppConstant;
 
@@ -26,6 +29,8 @@ import java.io.InputStream;
 public class AppContext extends Application{
 
     private static Context applicationContext;
+
+    private Cache mCache;
 
     /**judge whether the device is pad or phone*/
     private static boolean isTablet = false;
@@ -45,6 +50,8 @@ public class AppContext extends Application{
         applicationContext = this;
         isTablet = HardwareUtility.isTabletDevice(applicationContext);
 
+        mCache = Cache.get(this);
+
         if (!checkDBExist()) {
             copyDB();
         } else if (upgradeApp()) {
@@ -55,6 +62,14 @@ public class AppContext extends Application{
             editor.putInt(AppConstant.APP_VERSION, version);
             editor.commit();
         }
+    }
+
+    public void saveCache(String key, String cache) {
+        mCache.put(key, cache, 60*60);
+    }
+
+    public String getCache(String key) {
+        return mCache.getAsString(key);
     }
 
     /**
