@@ -48,7 +48,10 @@ public class History {
     public static class TABLE_PARAMS {
 
         public static String TABLE_NAME = "historys";
-        public static Uri CONTENT_BASE_URI = Uri.parse(DataProvider.AUTHORITY + TABLE_NAME + "/");
+        private static String SCHEMA = "content://";
+
+        public static Uri CONTENT_ALL_URL = Uri.parse(SCHEMA + DataProvider.AUTHORITY + "/" +TABLE_NAME);
+        public static Uri CONTENT_BASE_URI = Uri.parse(SCHEMA + DataProvider.AUTHORITY + "/" +TABLE_NAME + "/");
 
         public static String COLUMN_ID = "_id";
         public static String COLUMN_UPDATE_TIME = "updateTime";
