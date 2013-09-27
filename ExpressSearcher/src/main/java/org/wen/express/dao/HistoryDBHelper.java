@@ -23,9 +23,6 @@ public class HistoryDBHelper {
 
     public static History fromCursor(Cursor mCursor) {
         History history = new History();
-        if(mCursor == null || !mCursor.moveToFirst()) {
-            return history;
-        }
 
         history.code = mCursor.getString(mCursor.getColumnIndex(History.TABLE_PARAMS.COLUMN_CODE));
         history.queryTime = mCursor.getString(mCursor.getColumnIndex(History.TABLE_PARAMS.COLUMN_QUERY_TIME));

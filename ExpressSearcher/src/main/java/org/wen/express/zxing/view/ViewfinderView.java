@@ -84,7 +84,7 @@ public final class ViewfinderView extends View {
         resultPointColor = resources.getColor(R.color.possible_result_points);
         scannerAlpha = 0;
         possibleResultPoints = new HashSet<ResultPoint>(5);
-        resultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.qrcode_image);
+        resultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.razer_line);
     }
 
     @Override

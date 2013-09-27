@@ -5,4 +5,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <com.fima.cardsui.views.QuickReturnListView
+        android:id="@+id/lv_more_company"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

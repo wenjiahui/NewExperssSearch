@@ -18,4 +18,8 @@ public class AppConstant {
 
     public static final String EXPRESS_CODE = "EXPRESS_CODE";
 
+    public static final String COMPANY_CN = "COMPANY_CN";
+
+    public static final String COMPANY_EN = "COMPANY_EN";
+
 }

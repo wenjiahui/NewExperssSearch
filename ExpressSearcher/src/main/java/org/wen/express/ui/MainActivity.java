@@ -135,7 +135,7 @@ public class MainActivity extends SherlockFragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == AppConstant.LOAD_MORE_COMPANIES_REQUEST_CODE && resultCode == RESULT_OK) {
-            String company = data.getStringExtra(AppConstant.SELECTED_COMPANY);
+            String company = data.getStringExtra(AppConstant.COMPANY_CN);
             if (!TextUtils.isEmpty(company) && mSimpleCompanyFragment != null) {
                 mSimpleCompanyFragment.selectCompany(company);
             }
