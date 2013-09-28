@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,9 +74,20 @@ public class ListCompanyFragment extends Fragment implements LoaderManager.Loade
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public Loader<Cursor> onCreateLoader(int id, Bundle data) {
+        if (data == null) {
+            data = new Bundle();
+        }
+        String company = data.getString("condition");
+        String where = null;
+        if (!TextUtils.isEmpty(company)) {
+            where = Company.Params.COLUMN_CN_NAME + " like '%" + company + "%' or " + Company.Params.COLUMN_EN_NAME
+                    + " like '%" + company + "%'";
+            AppLogger.d(where);
+        }
         return new CursorLoader(getActivity(), Company.Params.CONTENT_COMPANYS_URI,
-                null, null, null, Company.Params.COLUMN_LETTER + " asc");
+                    null, where, null, Company.Params.COLUMN_LETTER + " asc");
+
     }
 
     @Override
@@ -89,5 +102,11 @@ public class ListCompanyFragment extends Fragment implements LoaderManager.Loade
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.changeCursor(null);
+    }
+
+    public void filterCompany(String condition) {
+        Bundle data = new Bundle();
+        data.putString("condition", condition);
+        getLoaderManager().restartLoader(0, data, this);
     }
 }
