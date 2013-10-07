@@ -24,6 +24,7 @@ public class HistoryDBHelper {
     public static History fromCursor(Cursor mCursor) {
         History history = new History();
 
+        history._id =  Integer.parseInt(mCursor.getString(mCursor.getColumnIndex(History.TABLE_PARAMS.COLUMN_ID)));
         history.code = mCursor.getString(mCursor.getColumnIndex(History.TABLE_PARAMS.COLUMN_CODE));
         history.queryTime = mCursor.getString(mCursor.getColumnIndex(History.TABLE_PARAMS.COLUMN_QUERY_TIME));
         history.company_cn = mCursor.getString(mCursor.getColumnIndex(History.TABLE_PARAMS.COLUMN_COMPANY_CN));

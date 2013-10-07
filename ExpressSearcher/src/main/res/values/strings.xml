@@ -14,6 +14,8 @@
     <string name="order_error_msg">快递公司参数异常：单号不存在或者已经过期</string>
     <string name="order_unknown">很抱歉，您的快递单号暂时没有查询结果！</string>
     <string name="order_ok">查询成功</string>
+    <string name="delete">删除</string>
+    <string name="delete_record_succefully">成功删除所选记录</string>
     <string name="record_tips">查询记录：</string>
     <string name="often_used">常用：</string>
     <string name="company_shentong">申通</string>

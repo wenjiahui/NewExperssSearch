@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import org.wen.express.common.AppLogger;
 import org.wen.express.module.History;
 
 /**
@@ -90,16 +91,19 @@ public class DataProvider extends ContentProvider{
                 count = db.delete(History.TABLE_PARAMS.TABLE_NAME, where, whereArgs);
                 break;
             case HISTORY_ID:
-                String finalWhere = History.TABLE_PARAMS.COLUMN_ID  + " = '" + uri.getPathSegments().get(1) + "'";
+                String finalWhere = History.TABLE_PARAMS.COLUMN_ID  + " = " + uri.getPathSegments().get(1) ;
                 if (!TextUtils.isEmpty(where)) {
                     finalWhere = finalWhere + " AND " + where;
                 }
+                AppLogger.d(finalWhere);
                 count = db.delete(History.TABLE_PARAMS.TABLE_NAME, finalWhere, whereArgs);
                 break;
             default:
                 throw new IllegalArgumentException("unknown Uri:" + uri);
         }
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (count > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return count;
     }
 

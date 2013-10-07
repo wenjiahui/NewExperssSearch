@@ -1,49 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_marginLeft="6dp"
-    android:layout_marginRight="6dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    android:background="@drawable/bg_card"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <TextView
-        android:id="@+id/id"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content" />
+    <LinearLayout
+        android:id="@+id/back"
+        style="@style/ListBackContent"
+        android:gravity="right|center_vertical"
+        android:tag="back">
 
-    <TextView
-        android:id="@+id/company_en"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content" />
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete" />
 
-    <TextView
-        android:id="@+id/company"
-        style="@style/text_history_item" />
 
-    <TextView
-        android:id="@+id/code"
-        style="@style/text_history_item" />
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+    <LinearLayout
+        android:id="@+id/front"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_card"
+        android:orientation="vertical"
+        android:tag="front"
+        android:layout_gravity="center_horizontal|bottom">
 
         <TextView
-            android:id="@+id/tag"
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/company_en"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/company"
             style="@style/text_history_item" />
 
         <TextView
-            android:layout_alignParentRight="true"
-            android:id="@+id/query_time"
+            android:id="@+id/code"
             style="@style/text_history_item" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tag"
+                style="@style/text_history_item" />
+
+            <TextView
+                android:id="@+id/query_time"
+                style="@style/text_history_item"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+</FrameLayout>

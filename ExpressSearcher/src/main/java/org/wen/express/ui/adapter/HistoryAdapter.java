@@ -2,13 +2,17 @@ package org.wen.express.ui.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import org.wen.express.AppContext;
 import org.wen.express.R;
 import org.wen.express.dao.HistoryDBHelper;
 import org.wen.express.module.History;
@@ -19,6 +23,12 @@ import org.wen.express.module.History;
 public class HistoryAdapter extends CursorAdapter {
 
     private LayoutInflater mInflater;
+
+    private OnHistoryDelete deleteCallback;
+
+    public void setDeleteCallback(OnHistoryDelete deleteCallback) {
+        this.deleteCallback = deleteCallback;
+    }
 
     public HistoryAdapter(Context context) {
         super(context, null, true);
@@ -46,6 +56,33 @@ public class HistoryAdapter extends CursorAdapter {
         holder.company_en.setText(history.company_en);
         holder.code.setText(history.code);
         holder.tag.setText(history.tag);
+
+        holder.delete.setOnClickListener(new DeleteListener(String.valueOf(history._id)));
+    }
+
+
+    private class DeleteListener implements View.OnClickListener {
+
+        private String id ;
+        private DeleteListener(String id) {
+            this.id = id;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (deleteCallback != null) {
+                deleteCallback.preDelete();
+            }
+            int result = AppContext.getInstance().getContentResolver().delete(
+                    Uri.parse(History.TABLE_PARAMS.CONTENT_BASE_URI + id), null, null);
+            if (result > 0) {
+                Toast.makeText(AppContext.getInstance(), R.string.delete_record_succefully, Toast.LENGTH_SHORT).show();
+
+            }
+            if (deleteCallback != null) {
+                deleteCallback.afterDelete();
+            }
+        }
     }
 
     private Holder getHolder(final View view) {
@@ -65,6 +102,7 @@ public class HistoryAdapter extends CursorAdapter {
         TextView code;
         TextView query_time;
         TextView tag;
+        Button delete;
 
         public Holder(View view) {
             id = (TextView) view.findViewById(R.id.id);
@@ -73,6 +111,16 @@ public class HistoryAdapter extends CursorAdapter {
             code = (TextView) view.findViewById(R.id.code);
             query_time = (TextView) view.findViewById(R.id.query_time);
             tag = (TextView) view.findViewById(R.id.tag);
+            delete = (Button)view.findViewById(R.id.btn_delete);
         }
+    }
+
+    /***
+     * 回调函数，重置mPreopenItemPosition = -1.
+     * 避免下一次滑动时出现空指针错误
+     */
+    public interface OnHistoryDelete {
+        void preDelete();
+        void afterDelete();
     }
 }
