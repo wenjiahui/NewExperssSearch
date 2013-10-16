@@ -106,6 +106,7 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
             @Override
             public void onClickFrontView(int position) {
                 Log.d("swipe", String.format("onClickFrontView %d", position));
+                itemClick(position);
             }
 
             @Override
@@ -125,16 +126,27 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
         swipeListView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView tv_company = (TextView) view.findViewById(R.id.company);
-                TextView tv_code = (TextView) view.findViewById(R.id.code);
-                String company = tv_company.getText().toString();
-                String code = tv_code.getText().toString();
-                Intent intent = new Intent(getActivity(), ResultActivity.class);
-                intent.putExtra(AppConstant.COMPANY, company);
-                intent.putExtra(AppConstant.EXPRESS_CODE, code);
-                startActivity(intent);
+               itemClick(position);
             }
         });
+    }
+
+
+    private void itemClick(int position) {
+
+        View view = swipeListView.getChildAt(position);
+        if (view == null) {
+            return;
+        }
+
+        TextView tv_company = (TextView) view.findViewById(R.id.company);
+        TextView tv_code = (TextView) view.findViewById(R.id.code);
+        String company = tv_company.getText().toString();
+        String code = tv_code.getText().toString();
+        Intent intent = new Intent(getActivity(), ResultActivity.class);
+        intent.putExtra(AppConstant.COMPANY, company);
+        intent.putExtra(AppConstant.EXPRESS_CODE, code);
+        startActivity(intent);
     }
 
     @Override
