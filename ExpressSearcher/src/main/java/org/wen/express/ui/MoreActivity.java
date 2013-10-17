@@ -8,14 +8,14 @@ import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+import me.imid.swipebacklayout.lib.app.SwipeBackSherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 import org.wen.express.R;
 import org.wen.express.ui.fragment.ListCompanyFragment;
 
-public class MoreActivity extends SherlockFragmentActivity {
+public class MoreActivity extends SwipeBackSherlockActivity {
 
     ListCompanyFragment mFrament = null;
 
@@ -61,6 +61,6 @@ public class MoreActivity extends SherlockFragmentActivity {
                 }
             });
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

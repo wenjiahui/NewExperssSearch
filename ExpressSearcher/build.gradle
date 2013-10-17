@@ -17,7 +17,7 @@ android {
     buildToolsVersion "18.0.1"
 
     defaultConfig {
-        minSdkVersion 8
+        minSdkVersion 14
         targetSdkVersion 17
     }
     
@@ -33,6 +33,7 @@ dependencies {
     compile project(':libraries:CardsUILib')
     compile project(':libraries:menudrawer')
     compile project(':libraries:swipelistview')
+    compile project(':libraries:Swipebacklayout')
     compile project(':libraries:ActionBar-PullToRefresh')
     compile fileTree(dir: 'libs', include: '*.jar')
 }
