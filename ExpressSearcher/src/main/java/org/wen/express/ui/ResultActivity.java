@@ -4,7 +4,6 @@ package org.wen.express.ui;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,13 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.wen.express.AppContext;
@@ -37,12 +34,12 @@ import org.wen.express.module.Result;
 import org.wen.express.type.AppConstant;
 import org.wen.express.ui.adapter.ResultAdapter;
 
-import java.util.Date;
 import java.util.List;
 
+import me.imid.swipebacklayout.lib.app.SwipeBackSherlockActivity;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
-public class ResultActivity extends SherlockActivity implements PullToRefreshAttacher.OnRefreshListener {
+public class ResultActivity extends SwipeBackSherlockActivity implements PullToRefreshAttacher.OnRefreshListener {
 
     private TextView tv_company;
     private TextView tv_expressCode;
