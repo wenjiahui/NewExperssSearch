@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.Request;
@@ -36,6 +35,8 @@ import org.wen.express.ui.adapter.ResultAdapter;
 
 import java.util.List;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import me.imid.swipebacklayout.lib.app.SwipeBackSherlockActivity;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
@@ -144,7 +145,8 @@ public class ResultActivity extends SwipeBackSherlockActivity implements PullToR
             cursor.close();
         } else {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(ResultActivity.this, R.string.company_not_exist, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ResultActivity.this, R.string.company_not_exist, Toast.LENGTH_SHORT).show();
+            Crouton.makeText(ResultActivity.this ,R.string.company_not_exist, Style.ALERT).show();
         }
         return _company;
     }
@@ -186,14 +188,16 @@ public class ResultActivity extends SwipeBackSherlockActivity implements PullToR
                 AppLogger.d(response.toString());
                 progressBar.setVisibility(View.GONE);
                 if (response.data == null || response.data.size() == 0) {
-                    Toast.makeText(ResultActivity.this, response.message, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ResultActivity.this, response.message, Toast.LENGTH_SHORT).show();
+                    Crouton.makeText(ResultActivity.this, response.message, Style.ALERT).show();
                     return;
                 }
                 listView.setVisibility(View.VISIBLE);
                 adapter.updateResult(response);
                 adapter.notifyDataSetChanged();
 
-                Toast.makeText(ResultActivity.this, R.string.load_data_successfully, Toast.LENGTH_SHORT).show();
+               //Toast.makeText(ResultActivity.this, R.string.load_data_successfully, Toast.LENGTH_SHORT).show();
+                Crouton.makeText(ResultActivity.this, R.string.load_data_successfully, Style.INFO).show();
 
                 History history = new History(response);
                 history.company_cn = originCompany;
@@ -211,7 +215,9 @@ public class ResultActivity extends SwipeBackSherlockActivity implements PullToR
             public void onErrorResponse(VolleyError error) {
                 AppLogger.d(error.toString());
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(ResultActivity.this, R.string.network_error, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ResultActivity.this, R.string.network_error, Toast.LENGTH_SHORT).show();
+                Crouton.makeText(ResultActivity.this, R.string.network_error, Style.ALERT).show();
+
                 if (mPullToRefreshAttacher.isRefreshing()) {
                     mPullToRefreshAttacher.setRefreshComplete();
                 }
