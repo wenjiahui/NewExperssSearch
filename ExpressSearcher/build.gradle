@@ -14,13 +14,31 @@ repositories {
 
 android {
     compileSdkVersion 17
-    buildToolsVersion "18.0.1"
+    buildToolsVersion "19"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 17
     }
-    
+
+
+    signingConfigs {
+
+        release {
+            storeFile file("../android.keystore")
+            storePassword "jiahuiwen1111"
+            keyAlias "wenjiahui"
+            keyPassword "jiahuiwen1111"
+        }
+    }
+
+    buildTypes {
+        release {
+            zipAlign true
+            signingConfig signingConfigs.release
+        }
+    }
+
     tasks.withType(Compile) { 
         options.encoding = "UTF-8" 
     }
