@@ -35,6 +35,7 @@ dependencies {
     compile project(':libraries:swipelistview')
     compile project(':libraries:Swipebacklayout')
     compile project(':libraries:ActionBar-PullToRefresh')
+    compile project(':libraries:Crouton')
     compile fileTree(dir: 'libs', include: '*.jar')
 }
 
