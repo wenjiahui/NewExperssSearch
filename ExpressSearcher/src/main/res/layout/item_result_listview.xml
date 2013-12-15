@@ -14,11 +14,13 @@
         android:id="@+id/time"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:textColor="#515151"
         android:textIsSelectable="false" />
 
     <TextView
         android:layout_marginTop="5dp"
         android:id="@+id/context"
+        android:textColor="#515151"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
