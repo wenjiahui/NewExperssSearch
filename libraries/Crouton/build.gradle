@@ -2,19 +2,21 @@ buildscript {
     repositories {
         mavenCentral()
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
-    }
 }
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 dependencies {
-    compile 'com.android.support:support-v4:18.0.+'
+    compile 'com.android.support:support-v4:22.1.1'
 }
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "18.0.1"
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 22
+    }
 
     sourceSets {
         main {
@@ -27,6 +29,6 @@ android {
             assets.srcDirs = ['assets']
         }
 
-        instrumentTest.setRoot('tests')
+        //instrumentTest.setRoot('tests')
     }
 }

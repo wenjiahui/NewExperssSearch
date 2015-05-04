@@ -2,33 +2,33 @@ buildscript {
     repositories {
         mavenCentral()
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
-    }
 }
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
 }
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "18.0.1"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
+        applicationId "org.wen.android.express"
         minSdkVersion 14
-        targetSdkVersion 17
+        targetSdkVersion 22
+        versionCode 2
+        versionName "1.10"
     }
-    
-    tasks.withType(Compile) { 
-        options.encoding = "UTF-8" 
+
+    lintOptions {
+        abortOnError false
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:18.0.0'
-    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.google.code.gson:gson:2.3'
     compile project(':libraries:actionbarsherlock')
     compile project(':libraries:CardsUILib')
     compile project(':libraries:menudrawer')

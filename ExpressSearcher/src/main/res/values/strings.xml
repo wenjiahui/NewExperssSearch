@@ -40,7 +40,7 @@
     <string name="cancel">取消</string>
     <string name="title_activity_more">更多快递公司</string>
     <string name="hello_world">Hello world!</string>
-    <string name="search">马上查询</string>
+    <string name="search">快递查询</string>
     <string name="history">历史记录</string>
     <string name="copy_db_error">复制数据库错误，请重启程序</string>
     <string name="company_is_empty">请先指定快递公司</string>

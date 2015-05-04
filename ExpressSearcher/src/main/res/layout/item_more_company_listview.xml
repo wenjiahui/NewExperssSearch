@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_marginLeft="6dp"
     android:layout_marginRight="6dp"
@@ -9,11 +10,11 @@
     android:gravity="center_vertical"
     android:background="@drawable/bg_card"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/icon"
-        android:src="@drawable/shunfeng_s"
+        tools:src="@drawable/default_icon"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content" />
 
@@ -34,13 +35,13 @@
         <TextView
             android:textSize="20sp"
             android:id="@+id/company"
-            android:text="company"
+            tools:text="company"
             style="@style/text_history_item" />
 
         <TextView
             android:layout_marginTop="10dp"
             android:id="@+id/phone"
-            android:text="13800138000"
+            tools:text="13800138000"
             style="@style/text_history_item" />
 
 
